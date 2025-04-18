@@ -1,4 +1,4 @@
-# **App Name**: Defcon7 Tracker
+# **App Name**: Defcon7
 
 ## Core Features:
 

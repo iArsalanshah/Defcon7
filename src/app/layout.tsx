@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Defcon7 Tracker',
+  title: 'Defcon7',
   description: 'Track top memecoin calls, leaderboards, and tutorials.',
 };
 
@@ -33,7 +33,7 @@ export default function RootLayout({
           </header>
           <main className="flex-1">{children}</main>
           <footer className="p-4 text-center text-sm text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} Defcon7 Tracker. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Defcon7. All rights reserved.</p>
           </footer>
         </div>
       </body>

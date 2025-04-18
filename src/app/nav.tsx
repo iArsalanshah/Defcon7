@@ -13,19 +13,19 @@ export default function Nav() {
     <nav className="bg-secondary rounded-md p-4 flex justify-around items-center">
       <NavLink href="/">
         <Home className="h-5 w-5" />
-        <span>Home</span>
+        <span className="hidden sm:inline">Home</span>
       </NavLink>
       <NavLink href="/leaderboard">
         <List className="h-5 w-5" />
-        <span>Leaderboard</span>
+        <span className="hidden sm:inline">Leaderboard</span>
       </NavLink>
       <NavLink href="/call-alerts">
         <Flame className="h-5 w-5" />
-        <span>Call Alerts</span>
+        <span className="hidden sm:inline">Call Alerts</span>
       </NavLink>
       <NavLink href="/tutorials">
         <GraduationCap className="h-5 w-5" />
-        <span>Tutorials</span>
+        <span className="hidden sm:inline">Tutorials</span>
       </NavLink>
     </nav>
   );
