@@ -1,4 +1,3 @@
-'use server';
 /**
  * @fileOverview A tutorial video recommendation AI agent.
  *
