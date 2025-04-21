@@ -1,13 +1,24 @@
+"use client";
+
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Disc } from "lucide-react"; // Changed Discord to Disc based on error message
 
+const memecoinImages = [
+  "/images/top_memecoins/image1.webp",
+  "/images/top_memecoins/image2.webp",
+  "/images/top_memecoins/image3.webp",
+];
+
 const teamMembers = [
   {
+    img: "/images/team/ghost.jpg",
     name: "Ghost",
     description: "Expert at finding promising memecoins and making top calls.",
   },
   {
+    img: "/images/team/coach.jpg",
     name: "CoachCrypto",
     description: "Admin who handles community operations and creates helpful YouTube tutorials for new traders.",
   },
@@ -32,6 +43,19 @@ const features = [
 ];
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState("");
+
+  const openModal = (image: string) => {
+    setCurrentImage(image);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setCurrentImage("");
+  };
+
   return (
     <div className="container mx-auto py-10">
       {/* Hero Section */}
@@ -40,25 +64,27 @@ export default function Home() {
         <p className="text-lg text-muted-foreground mb-6">
           Your ultimate source for memecoin insights and top trader leaderboards.
         </p>
-        <Button>
-          <Disc className="mr-2 h-4 w-4" /> {/* Changed Discord to Disc */}
-          Join Our Discord
-        </Button>
+        <a href="https://discord.com/invite/RqFSuFsk6z" target="_blank" rel="noopener noreferrer">
+          <Button>
+            <Disc className="mr-2 h-4 w-4" />
+            Join Our Discord
+          </Button>
+        </a>
       </section>
 
       {/* Top Memecoin Calls */}
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-4">Top Memecoin Calls</h2>
-        {/* Placeholder content - replace with actual data fetching and display */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[1, 2, 3].map((i) => (
-            <Card key={i}>
-              <CardHeader>
-                <CardTitle>Coin Name {i}</CardTitle>
-                <CardDescription>Caller: Caller Name</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-3xl font-bold">+{(Math.random() * 1000).toFixed(0)}%</p>
+          {memecoinImages.map((image, index) => (
+            <Card key={index} className="p-0 overflow-hidden border rounded">
+              <CardContent className="p-0">
+                <img
+                  src={image}
+                  alt={`Memecoin ${index + 1}`}
+                  className="w-full h-auto object-cover cursor-pointer"
+                  onClick={() => openModal(image)}
+                />
               </CardContent>
             </Card>
           ))}
@@ -95,20 +121,46 @@ export default function Home() {
 
         {/* Meet the Team */}
         <div className="mb-8">
-          <h3 className="text-xl font-semibold mb-3">Meet the Team</h3>
+          <h3 className="text-2xl font-semibold mb-4">Meet the Team</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {teamMembers.map((member, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <CardTitle>{member.name}</CardTitle>
+              <Card key={index} className="flex items-center p-4">
+                <img
+                  src={member.img}
+                  alt={member.name}
+                  className="w-16 h-16 rounded-full mr-4"
+                />
+                <div>
+                <CardTitle className="mb-2">{member.name}</CardTitle>
                   <CardDescription>{member.description}</CardDescription>
-                </CardHeader>
+                </div>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Modal for Full-Screen Image */}
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+          onClick={closeModal}
+        >
+          <div className="relative">
+            <img
+              src={currentImage}
+              alt="Full Screen"
+              className="max-w-full max-h-full rounded"
+            />
+            <button
+              className="absolute top-2 right-2 text-white text-2xl"
+              onClick={closeModal}
+            >
+              &times;
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
